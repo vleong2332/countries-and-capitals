@@ -1,0 +1,12 @@
+@import 'variables';
+@import 'mixins';
+
+/*==================*/
+/* APP-LEVEL STYLES */
+/*==================*/
+header {
+	border-bottom: 1px solid black;
+	h1 {
+		text-align: center;
+	}
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cacApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Countries and Capitals</title>
+
+	<!-- build:css ./_assets/combined.css -->
+	<link rel="stylesheet" type="text/css" href="./bower_components/normalize.css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="./cac_app.css" />
+	<!-- endbuild -->
+
+	<script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="./cac_lib.js"></script>
+	<script type="text/javascript" src="./cac_app_views.js"></script>
+	<script type="text/javascript" src="./cac_app.js"></script>
+
+</head>
+
+<body>
+
+	<header>
+		<h1>Countries and Capitals</h1>
+	</header>
+
+	<div ng-view></div>
+
+</body>
+</html>
