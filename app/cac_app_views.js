@@ -19,9 +19,11 @@ cacRouteViewMod.config(['$routeProvider', function($routeProvider) {
 		})
 
 		.when('/countries/:country/capital', {
-			templateUrl: 'countires/country.html',
+			templateUrl: 'countries/country.html',
 			controller: 'defCtrl',
-			resolve: {}
+			resolve: {
+				try: function() {console.log('resolving');}
+			}
 		})
 		.otherwise('/');
 }]);
@@ -31,10 +33,16 @@ cacRouteViewMod.controller('homeCtrl', function($scope) {
 	$scope.message = "home controller";
 })
 
-cacRouteViewMod.controller('countriesCtrl', function($scope, countries) {
+cacRouteViewMod.controller('countriesCtrl', function($scope, $location, countries) {
 	$scope.countries = countries.geonames;
+	$scope.goToCountry = function(country) {
+		var x = '#/countries/' + country + '/capital';
+		console.log('redirecting to', x);
+		$location.path(x);
+	};
 });
 
-// cacRouteViewMod.controller('defCtrl', function($scope) {
-// 	$scope.message = "default controller";
-// });
+ cacRouteViewMod.controller('defCtrl', function($scope) {
+ 	$scope.message = "default controller";
+ 	console.log('controller is called');
+ });
