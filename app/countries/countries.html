@@ -1,1 +1,26 @@
-Countries html {{ message }}
+<div class="scrollable-wrapper">
+	<div class="scrolling-area">
+		<table id="countries">
+			<thead>
+				<tr>
+					<th class="code header"><div>Code</div></th>
+					<th class="name header"><div>Name</div></th>
+					<th class="capital header"><div>Capital</div></th>
+					<th class="area header"><div>Area<br />(km2)</div></th>
+					<th class="population header"><div>Population</div></th>
+					<th class="continent header"><div>Continent</div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="country in countries track by $index">
+					<td class="code"><div>{{ country.countryCode }}</div></td>
+					<td class="name"><div>{{ country.countryName }}</div></td>
+					<td class="capital"><div>{{ country.capital }}</div></td>
+					<td class="area"><div>{{ country.areaInSqKm | number}}</div></td>
+					<td class="population"><div>{{ country.population | number }}</div></td>
+					<td class="continent"><div>{{ country.continent }}</div></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

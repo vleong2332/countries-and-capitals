@@ -4,9 +4,65 @@
 /*==================*/
 /* APP-LEVEL STYLES */
 /*==================*/
+* {
+	box-sizing: border-box;
+}
 header {
 	border-bottom: 1px solid black;
 	h1 {
 		text-align: center;
 	}
+}
+
+/*=================*/
+/* COUNTRIES TABLE */
+/*=================*/
+.scrollable-wrapper {
+	position: relative;
+	width: 845px;
+	padding-top: 68px;
+	margin: 0 auto;
+}
+.scrolling-area {
+	width: 825px;
+	height: 580px;
+	overflow: auto;
+	overflow-x: hidden;
+}
+
+table#countries {
+	cellspacing: 0;
+	border-collapse: collapse;
+	width: 825px;
+	margin: 0;
+	padding: 0;
+
+	tbody div, td, th {margin: 0; padding: 0;}
+
+	td {
+		padding: 0.6em 0.1em;
+	}
+
+	tr:nth-child(even) {
+		background-color: $evenRowBG;
+	}
+
+	thead tr {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	th.header {
+		padding: 1em 0;
+		text-align: center;
+		background-color: $tableHeaderBG;
+	}
+
+	.code {width: 50px; text-align: center;}
+	.name {width: 300px;}
+	.capital {width: 150px;}
+	.area {width: 100px; text-align: right;}
+	.population {width: 125px; text-align: right;}
+	.continent {width: 100px; text-align: center;}
 }

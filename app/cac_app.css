@@ -7,7 +7,63 @@
 /*==================*/
 /* APP-LEVEL STYLES */
 /*==================*/
+* {
+  box-sizing: border-box; }
+
 header {
   border-bottom: 1px solid black; }
   header h1 {
+    text-align: center; }
+
+/*=================*/
+/* COUNTRIES TABLE */
+/*=================*/
+.scrollable-wrapper {
+  position: relative;
+  width: 845px;
+  padding-top: 68px;
+  margin: 0 auto; }
+
+.scrolling-area {
+  width: 825px;
+  height: 580px;
+  overflow: auto;
+  overflow-x: hidden; }
+
+table#countries {
+  cellspacing: 0;
+  border-collapse: collapse;
+  width: 825px;
+  margin: 0;
+  padding: 0; }
+  table#countries tbody div, table#countries td, table#countries th {
+    margin: 0;
+    padding: 0; }
+  table#countries td {
+    padding: 0.6em 0.1em; }
+  table#countries tr:nth-child(even) {
+    background-color: #E7E7E7; }
+  table#countries thead tr {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  table#countries th.header {
+    padding: 1em 0;
+    text-align: center;
+    background-color: #ABABAB; }
+  table#countries .code {
+    width: 50px;
+    text-align: center; }
+  table#countries .name {
+    width: 300px; }
+  table#countries .capital {
+    width: 150px; }
+  table#countries .area {
+    width: 100px;
+    text-align: right; }
+  table#countries .population {
+    width: 125px;
+    text-align: right; }
+  table#countries .continent {
+    width: 100px;
     text-align: center; }

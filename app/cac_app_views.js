@@ -1,6 +1,6 @@
 var cacRouteViewMod = angular.module('cacRouteViewMod', ['ngRoute', 'cacLib']);
 
-cacRouteViewMod.config(['$routeProvider', 'cacLib', function($routeProvider, cacLib) {
+cacRouteViewMod.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 
 		.when('/', {
@@ -10,11 +10,11 @@ cacRouteViewMod.config(['$routeProvider', 'cacLib', function($routeProvider, cac
 
 		.when('/countries', {
 			templateUrl: 'countries/countries.html',
-			controller: 'defCtrl',
+			controller: 'countriesCtrl',
 			resolve : {
-				countries: ['cacLib', function(cacLib) {
+				countries: function(getCountries) {
 					return getCountries();
-				}]
+				}
 			}
 		})
 
@@ -31,7 +31,10 @@ cacRouteViewMod.controller('homeCtrl', function($scope) {
 	$scope.message = "home controller";
 })
 
-
-cacRouteViewMod.controller('defCtrl', function($scope) {
-	$scope.message = "default controller";
+cacRouteViewMod.controller('countriesCtrl', function($scope, countries) {
+	$scope.countries = countries.geonames;
 });
+
+// cacRouteViewMod.controller('defCtrl', function($scope) {
+// 	$scope.message = "default controller";
+// });

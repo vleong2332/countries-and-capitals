@@ -1,8 +1,8 @@
 var cacLib = angular.module('cacLib', []);
 
-cacLib.constant('CAC_API_PREFIX', 'http://api.geonames.org/countryInfo?username=vleong2332');
+cacLib.constant('CAC_API_PREFIX', 'http://api.geonames.org/countryInfoJSON?username=vleong2332');
 
-cacLib.factory('getCountries', function($http, $q, CAC_API_PREFIX) {
+cacLib.factory('getCountries', ['$http', '$q', 'CAC_API_PREFIX', function($http, $q, CAC_API_PREFIX) {
 		return function() {
 			var defer = $q.defer();
 			$http.get(CAC_API_PREFIX)
@@ -15,4 +15,4 @@ cacLib.factory('getCountries', function($http, $q, CAC_API_PREFIX) {
 			return defer.promise;
 		}
 	}
-);
+]);
