@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="country in countries track by $index" ng-click="goToCountry(country.countryName)">
+				<tr ng-repeat="country in countries track by $index" ng-click="goToCountry(country.geonameId)">
 					<td class="code"><div>{{ country.countryCode }}</div></td>
 					<td class="name"><div>{{ country.countryName }}</div></td>
 					<td class="capital"><div>{{ country.capital }}</div></td>
@@ -24,3 +24,7 @@
 		</table>
 	</div>
 </div>
+
+<button-div>
+	<home-button></home-button>
+</button-div>
