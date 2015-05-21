@@ -1,39 +1,50 @@
 var DEBUG = true;
 
-var cacRouteViewMod = angular.module('cacRouteViewMod', ['ngRoute', 'cacLib']);
+var cacRouteViewMod = angular.module('cacRouteViewMod', ['ui.router', 'cacLib']);
 
-cacRouteViewMod.config(['$routeProvider', function($routeProvider, $routeParams) {
-	$routeProvider
+cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/');
 
-		.when('/', {
+	console.log('urlRouterProvider triggered');
+
+	$stateProvider
+		.state('home', {
+			url: '/',
 			templateUrl: 'home/home.html',
 			controller: 'homeCtrl'
 		})
 
-		.when('/countries', {
+		.state('countries', {
+			url: '/countries',
 			templateUrl: 'countries/countries.html',
 			controller: 'countriesCtrl',
 			resolve : {
 				countries: function(getCountries) {
-					return getCountries();
+					return getCountry();
 				}
 			}
 		})
 
-		.when('/countries/:country/capital', {
+		.state('country', {
+			url: '/countries/:country/capital',
 			templateUrl: 'countries/country.html',
 			controller: 'countryDetailCtrl',
 			resolve: {
-				// capital: function(getCapital) {
-				// 	return getCapital();
-				// 	if(DEBUG) console.log('resolving capital');
-				// },
-				neighbors: function($route, getNeighbors) {
+				geoname: ['$route', 'getGeoname', function($route, getGeoname) {
+					console.log('resolving geoname');
+					return getGeoname($route.current.params.country);
+				}],
+				country: ['getCountry', 'geoname', function(getCountry, geoname) {
+					return getCountry(geoname.countryCode);
+				}],
+				neighbors: ['$route', 'getNeighbors', function($route, getNeighbors) {
 					return getNeighbors($route.current.params.country);
-				}
+				}]
 			}
-		})
-		.otherwise('/');
+		});
+
+	console.log('stateProvider is triggered');
+
 }]);
 
 
@@ -50,9 +61,12 @@ cacRouteViewMod.controller('countriesCtrl', function($scope, $location, countrie
 	};
 });
 
-cacRouteViewMod.controller('countryDetailCtrl', function($scope, neighbors) {
+cacRouteViewMod.controller('countryDetailCtrl', function($scope, geoname, country, neighbors) {
+	console.log('countryDetailCtrl is triggered');
+	$scope.geoname = geoname;
 	$scope.neighbors = neighbors.geonames;
-	if(DEBUG) console.log('controller is called');
+	$scope.country = country;
+	console.log($scope.geoname, $scope.neighbors, $scope.country);
 });
 
 

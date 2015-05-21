@@ -1,7 +1,16 @@
-Neighbors :
-<p ng-repeat="neighbor in neighbors track by $index">{{ neighbor.countryName }}</p>
+Country Name: {{ geoname.name }}<br />
+Population: {{  }}<br />
+Area: {{  }}<br />
+Capital: {{  }}<br />
+Capital Popl: {{  }}<br />
+Continent: {{  }}<br />
+Timezone: {{  }}<br />
+{{ neighbors.length }} Neighbors :
+<span ng-repeat="neighbor in neighbors track by $index">{{ neighbor.countryName }}</span><br />
+Map: {{  }}<br />
+Flag: {{  }}<br />
 
-<buttonDiv>
-	<homeButton></homeButton>
-	<browseButton></browseButton>
-</buttonDiv>
+<button-div>
+	<home-button></home-button>
+	<browse-button></browse-button>
+</button-div>

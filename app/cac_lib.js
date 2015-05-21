@@ -6,23 +6,27 @@ cacLib.constant('CAC_API_PREFIX', 'http://api.geonames.org/');
 cacLib.constant('COUNTRY_PATH', 'countryInfoJSON');
 cacLib.constant('CAPITAL_PATH', '');
 cacLib.constant('NEIGHBORS_PATH', 'neighboursJSON');
+cacLib.constant('GEONAME_PATH', 'getJSON');
 cacLib.constant('CAC_API_USERNAME', 'vleong2332');
 
-cacLib.factory('getCountries', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', 'CAC_API_USERNAME',
+cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', 'CAC_API_USERNAME',
 	function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
-		return function() {
+		return function(countryCode) {
+			console.log('cc', countryCode);
+			var country = countryCode || null;
 			var defer = $q.defer();
 			$http({
 				url: CAC_API_PREFIX + COUNTRY_PATH,
 				method: 'GET',
 				cache: true,
 				params: {
+					country: country,
 					username: CAC_API_USERNAME
 				}
 			})
 				.success(function(data) {
+					console.log('getcountry', data);
 					defer.resolve(data);
-					if(DEBUG) console.log(data);
 				})
 				.error(function(data) {
 					console.log('getCountry went wrong');
@@ -31,6 +35,30 @@ cacLib.factory('getCountries', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH',
 		}
 	}
 ]);
+
+cacLib.factory('getGeoname', function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
+	return function(geonameId) {
+		var defer = $q.defer();
+		console.log('asdf');
+		$http({
+			url: CAC_API_PREFIX + GEONAME_PATH,
+			method: 'GET',
+			cache: true,
+			params: {
+				geonameId: geonameId,
+				username: CAC_API_USERNAME
+			}
+		})
+			.success(function(data) {
+				//console.log('geoname', data);
+				defer.resolve(data);
+			})
+			.error(function() {
+				console.log('getNeighbors went wrong');
+			});
+		return defer.promise;
+	}
+});
 
 cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
@@ -45,10 +73,11 @@ cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PAT
 			}
 		})
 			.success(function(data) {
+				//console.log('getNeighbors', data);
 				defer.resolve(data);
 			})
 			.error(function() {
-				//console.log('getNeighbors went wrong');
+				console.log('getNeighbors went wrong');
 			});
 		return defer.promise;
 	}
@@ -67,7 +96,7 @@ cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, CAPITAL_PATH, C
 		})
 			.success(function() {
 				defer.resolve(data);
-				console.log(data);
+				//console.log(data);
 			})
 			.error(function() {
 				console.log('getCapital went wrong');
