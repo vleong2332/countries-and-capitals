@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="cacApp">
+<html lang="en" ng-app="cacApp" ng-class="{loading: isloading}">
 <head>
 	<meta charset="UTF-8">
 	<title>Countries and Capitals</title>
@@ -10,8 +10,12 @@
 	<!-- endbuild -->
 
 	<script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
-	<!-- // <script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script> -->
+	<script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="./bower_components/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript" src="./bower_components/velocity/velocity.min.js"></script>
+	<script type="text/javascript" src="./bower_components/velocity/velocity.ui.min.js"></script>
+	<script type="text/javascript" src="./bower_components/angular-velocity/angular-velocity.min.js"></script>
 	<script type="text/javascript" src="./cac_lib.js"></script>
 	<script type="text/javascript" src="./cac_app_views.js"></script>
 	<script type="text/javascript" src="./cac_app.js"></script>
@@ -19,12 +23,11 @@
 </head>
 
 <body>
-
 	<header>
 		<h1>Countries and Capitals</h1>
 	</header>
 
-	<div ui-view></div>
+	<div ui-view class="velocity-opposites-transition-slideUpIn"></div>
 
 </body>
 </html>

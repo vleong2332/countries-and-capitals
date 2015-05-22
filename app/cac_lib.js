@@ -12,7 +12,6 @@ cacLib.constant('CAC_API_USERNAME', 'vleong2332');
 cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', 'CAC_API_USERNAME',
 	function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
 		return function(countryCode) {
-			console.log('cc', countryCode);
 			var country = countryCode || null;
 			var defer = $q.defer();
 			$http({
