@@ -1,14 +1,36 @@
-Country Name: {{ geoname.name }}<br />
-Population: {{  }}<br />
-Area: {{  }}<br />
-Capital: {{  }}<br />
-Capital Popl: {{  }}<br />
-Continent: {{  }}<br />
-Timezone: {{  }}<br />
-{{ neighbors.length }} Neighbors :
-<span ng-repeat="neighbor in neighbors track by $index">{{ neighbor.countryName }}</span><br />
-Map: {{  }}<br />
-Flag: {{  }}<br />
+<div id="detail-wrapper">
+	<h2>{{ geoname.name | uppercase}}</h2>
+	<div id="flag">
+		<img ng-src="http://www.geonames.org/flags/x/{{ geoname.countryCode | lowercase }}.gif">
+	</div>
+	<div id="country-details">
+		<div class="labels">
+			<p>Population:</p>
+			<p>Area:</p>
+			<p>Continent:</p>
+			<p>Timezone:</p>
+			<p>Capital:</p>
+			<p>Capital Population:</p>
+			<p>{{ neighbors.length }} neighbors:</p>
+		</div>
+		<div class="data">
+			<p>{{ geoname.population | number }}</p>
+			<p>{{ country.areaInSqKm | number }} km squared</p>
+			<p>{{ geoname.continentCode }}</p>
+			<p>GMT {{ geoname.timezone.gmtOffset }}</p>
+			<p>{{ country.capital }}</p>
+			<p>{{ capital.population | number }}</p>
+			<p>
+				<span ng-repeat="neighbor in neighbors track by $index">
+					<a ng-href="#/countries/{{ neighbor.geonameId }}/capital">{{ neighbor.countryName }}</a> 
+				</span>
+			</p>
+		</div>
+		<div id="map">
+			<img src="http://www.geonames.org/img/country/250/{{ geoname.countryCode| uppercase }}.png" alt="">
+		</div>
+	</div>
+</div>
 
 <button-div>
 	<home-button></home-button>

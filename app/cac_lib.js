@@ -4,7 +4,7 @@ var cacLib = angular.module('cacLib', []);
 
 cacLib.constant('CAC_API_PREFIX', 'http://api.geonames.org/');
 cacLib.constant('COUNTRY_PATH', 'countryInfoJSON');
-cacLib.constant('CAPITAL_PATH', '');
+cacLib.constant('SEARCH_PATH', 'searchJSON');
 cacLib.constant('NEIGHBORS_PATH', 'neighboursJSON');
 cacLib.constant('GEONAME_PATH', 'getJSON');
 cacLib.constant('CAC_API_USERNAME', 'vleong2332');
@@ -25,7 +25,6 @@ cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', '
 				}
 			})
 				.success(function(data) {
-					console.log('getcountry', data);
 					defer.resolve(data);
 				})
 				.error(function(data) {
@@ -39,7 +38,6 @@ cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', '
 cacLib.factory('getGeoname', function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
-		console.log('asdf');
 		$http({
 			url: CAC_API_PREFIX + GEONAME_PATH,
 			method: 'GET',
@@ -50,11 +48,10 @@ cacLib.factory('getGeoname', function($http, $q, CAC_API_PREFIX, GEONAME_PATH, C
 			}
 		})
 			.success(function(data) {
-				//console.log('geoname', data);
 				defer.resolve(data);
 			})
 			.error(function() {
-				console.log('getNeighbors went wrong');
+				console.log('getGeoname went wrong');
 			});
 		return defer.promise;
 	}
@@ -73,7 +70,6 @@ cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PAT
 			}
 		})
 			.success(function(data) {
-				//console.log('getNeighbors', data);
 				defer.resolve(data);
 			})
 			.error(function() {
@@ -83,20 +79,25 @@ cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PAT
 	}
 });
 
-cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, CAPITAL_PATH, CAC_API_USERNAME, country) {
-	return function(country) {
+cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
+	return function(capitalName, countryCode) {
 		var defer = $q.defer();
 		$http({
-			url: CAC_API_PREFIX + CAPITAL_PATH,
+			url: CAC_API_PREFIX + SEARCH_PATH,
 			method: 'GET',
 			cache: true,
 			params: {
-				username: CAC_API_USERNAME
+				username: CAC_API_USERNAME,
+				q: capitalName,
+				name_equals: capitalName,
+				country: countryCode,
+				isNameRequired: true,
+				featureCode: 'PPLC'
 			}
 		})
-			.success(function() {
+			.success(function(data) {
+				console.log('getCapital', data);
 				defer.resolve(data);
-				//console.log(data);
 			})
 			.error(function() {
 				console.log('getCapital went wrong');

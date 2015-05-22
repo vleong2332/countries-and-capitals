@@ -3,9 +3,7 @@ var DEBUG = true;
 var cacRouteViewMod = angular.module('cacRouteViewMod', ['ui.router', 'cacLib']);
 
 cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-	//$urlRouterProvider.otherwise('/');
-
-	console.log('urlRouterProvider triggered');
+	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 		.state('home', {
@@ -30,21 +28,20 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 			templateUrl: 'countries/country.html',
 			controller: 'countryDetailCtrl',
 			resolve: {
-				geoname: ['$route', 'getGeoname', function($route, getGeoname) {
-					console.log('resolving geoname');
-					return getGeoname($route.current.params.country);
+				geoname: ['$stateParams', 'getGeoname', function($stateParams, getGeoname) {
+					return getGeoname($stateParams.country);
 				}],
 				country: ['getCountry', 'geoname', function(getCountry, geoname) {
 					return getCountry(geoname.countryCode);
 				}],
-				neighbors: ['$route', 'getNeighbors', function($route, getNeighbors) {
-					return getNeighbors($route.current.params.country);
+				capital: ['getCapital', 'country', function(getCapital, country) {
+					return getCapital(country.geonames[0].capital, country.geonames[0].countryCode);
+				}],
+				neighbors: ['$stateParams', 'getNeighbors', function($stateParams, getNeighbors) {
+					return getNeighbors($stateParams.country);
 				}]
 			}
 		});
-
-	console.log('stateProvider is triggered');
-
 }]);
 
 
@@ -61,12 +58,12 @@ cacRouteViewMod.controller('countriesCtrl', function($scope, $location, countrie
 	};
 });
 
-cacRouteViewMod.controller('countryDetailCtrl', function($scope, geoname, country, neighbors) {
-	console.log('countryDetailCtrl is triggered');
+cacRouteViewMod.controller('countryDetailCtrl', function($scope, geoname, country, capital, neighbors) {
 	$scope.geoname = geoname;
 	$scope.neighbors = neighbors.geonames;
-	$scope.country = country;
-	console.log($scope.geoname, $scope.neighbors, $scope.country);
+	console.log($scope.neighbors);
+	$scope.country = country.geonames[0];
+	$scope.capital = capital.geonames[0];
 });
 
 

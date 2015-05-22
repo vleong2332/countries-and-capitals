@@ -72,3 +72,41 @@ table#countries {
   table#countries .continent {
     width: 100px;
     text-align: center; }
+  table#countries tbody tr:hover {
+    cursor: pointer;
+    background-color: rgba(32, 149, 240, 0.25); }
+
+/*================*/
+/* COUNTRY DETAIL */
+/*================*/
+#detail-wrapper {
+  width: 845px;
+  margin: 0 auto;
+  padding-top: 1em; }
+  #detail-wrapper h2 {
+    width: 100%;
+    text-align: center; }
+  #detail-wrapper #country-details::after {
+    content: '';
+    display: block;
+    clear: both; }
+  #detail-wrapper .labels {
+    width: 50%;
+    float: left;
+    text-align: right;
+    padding-right: 1em; }
+  #detail-wrapper .data {
+    width: 50%;
+    float: left; }
+
+#flag, #map {
+  width: 280px;
+  margin: 0 auto; }
+
+#map {
+  padding-top: 3em;
+  clear: both; }
+
+#flag img {
+  width: 100%;
+  height: 100%; }
