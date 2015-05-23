@@ -1,5 +1,3 @@
-var DEBUG = true;
-
 var cacRouteViewMod = angular.module('cacRouteViewMod', ['ui.router', 'cacLib']);
 
 cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -17,9 +15,9 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 			templateUrl: 'countries/countries.html',
 			controller: 'countriesCtrl',
 			resolve : {
-			 	countries: function(getCountry) {
+			 	countries: ["getCountry", function(getCountry) {
 			 		return getCountry();
-			 	}
+			 	}]
 			}
 		})
 
@@ -45,26 +43,24 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 }]);
 
 
-cacRouteViewMod.controller('homeCtrl', function($scope) {
-	$scope.message = "home controller";
-})
+cacRouteViewMod.controller('homeCtrl', ["$scope", function($scope) {
+	
+}])
 
-cacRouteViewMod.controller('countriesCtrl', function($scope, $location, countries) {
+cacRouteViewMod.controller('countriesCtrl', ["$scope", "$location", "countries", function($scope, $location, countries) {
 	$scope.countries = countries.geonames;
 	$scope.goToCountry = function(country) {
 		var x = '/countries/' + country + '/capital';
-		if(DEBUG) console.log('redirecting to', x);
 		$location.path(x);
 	};
-});
+}]);
 
-cacRouteViewMod.controller('countryDetailCtrl', function($scope, geoname, country, capital, neighbors) {
+cacRouteViewMod.controller('countryDetailCtrl', ["$scope", "geoname", "country", "capital", "neighbors", function($scope, geoname, country, capital, neighbors) {
 	$scope.geoname = geoname;
 	$scope.neighbors = neighbors.geonames;
-	console.log($scope.neighbors);
 	$scope.country = country.geonames[0];
 	$scope.capital = capital.geonames[0];
-});
+}]);
 
 
 // ===================================================================================

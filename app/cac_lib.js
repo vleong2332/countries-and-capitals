@@ -1,5 +1,3 @@
-var DEBUG = true;
-
 var cacLib = angular.module('cacLib', []);
 
 cacLib.constant('CAC_API_PREFIX', 'http://api.geonames.org/');
@@ -34,7 +32,7 @@ cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', '
 	}
 ]);
 
-cacLib.factory('getGeoname', function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
+cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -54,9 +52,9 @@ cacLib.factory('getGeoname', function($http, $q, CAC_API_PREFIX, GEONAME_PATH, C
 			});
 		return defer.promise;
 	}
-});
+}]);
 
-cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
+cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -76,9 +74,9 @@ cacLib.factory('getNeighbors', function($http, $q, CAC_API_PREFIX, NEIGHBORS_PAT
 			});
 		return defer.promise;
 	}
-});
+}]);
 
-cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
+cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
 	return function(capitalName, countryCode) {
 		var defer = $q.defer();
 		$http({
@@ -95,7 +93,6 @@ cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CA
 			}
 		})
 			.success(function(data) {
-				console.log('getCapital', data);
 				defer.resolve(data);
 			})
 			.error(function() {
@@ -103,4 +100,4 @@ cacLib.factory('getCapital', function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CA
 			});
 		return defer.promise;
 	}
-});
+}]);

@@ -1,6 +1,6 @@
-var cacApp = angular.module('cacApp', ['cacRouteViewMod', 'ngRoute', 'ngAnimate', 'angular-velocity']);
+var cacApp = angular.module('cacApp', ['cacRouteViewMod', 'ngAnimate', 'angular-velocity']);
 
-cacApp.run(function($rootScope, $route, $location, $timeout) {
+cacApp.run(["$rootScope", "$location", "$timeout", function($rootScope, $location, $timeout) {
 	$rootScope.$on('$stateChangeStart', function() {
 		console.log('loading');
 		$rootScope.isloading = true;
@@ -9,4 +9,4 @@ cacApp.run(function($rootScope, $route, $location, $timeout) {
 		console.log('success');
 		$rootScope.isloading = false;
 	});
-});
+}]);

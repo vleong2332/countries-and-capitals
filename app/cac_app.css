@@ -49,12 +49,11 @@ header {
   width: 845px;
   padding-top: 88px;
   margin: 0 auto; }
-
-.scrolling-area {
-  width: 825px;
-  height: 65vh;
-  overflow: auto;
-  overflow-x: hidden; }
+  .scrollable-wrapper .scrolling-area {
+    width: 825px;
+    height: 65vh;
+    overflow: auto;
+    overflow-x: hidden; }
 
 table#countries {
   cellspacing: 0;
