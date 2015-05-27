@@ -1,7 +1,7 @@
 var cacRouteViewMod = angular.module('cacRouteViewMod', ['ui.router', 'cacLib']);
 
 cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/');
+	//$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 		.state('home', {

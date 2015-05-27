@@ -8,7 +8,7 @@ cacLib.constant('GEONAME_PATH', 'getJSON');
 cacLib.constant('CAC_API_USERNAME', 'vleong2332');
 
 cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', 'CAC_API_USERNAME',
-	function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
+function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
 		return function(countryCode) {
 			var country = countryCode || null;
 			var defer = $q.defer();
@@ -32,7 +32,8 @@ cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', '
 	}
 ]);
 
-cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
+cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -54,7 +55,8 @@ cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "
 	}
 }]);
 
-cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
+cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -76,7 +78,8 @@ cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH
 	}
 }]);
 
-cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
+cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
 	return function(capitalName, countryCode) {
 		var defer = $q.defer();
 		$http({
@@ -84,12 +87,12 @@ cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "C
 			method: 'GET',
 			cache: true,
 			params: {
-				username: CAC_API_USERNAME,
 				q: capitalName,
 				name_equals: capitalName,
 				country: countryCode,
 				isNameRequired: true,
-				featureCode: 'PPLC'
+				featureCode: 'PPLC',
+				username: CAC_API_USERNAME
 			}
 		})
 			.success(function(data) {
