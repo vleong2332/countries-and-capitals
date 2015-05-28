@@ -28,15 +28,19 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 			controller: 'countryDetailCtrl',
 			resolve: {
 				geoname: ['$stateParams', 'getGeoname', function($stateParams, getGeoname) {
+					console.log('real getGeoname is called');
 					return getGeoname($stateParams.country);
 				}],
 				country: ['getCountry', 'geoname', function(getCountry, geoname) {
+					console.log('real getCountry is called');
 					return getCountry(geoname.countryCode);
 				}],
 				capital: ['getCapital', 'country', function(getCapital, country) {
+					console.log('real getCapital is called');
 					return getCapital(country.geonames[0].capital, country.geonames[0].countryCode);
 				}],
 				neighbors: ['$stateParams', 'getNeighbors', function($stateParams, getNeighbors) {
+					console.log('real getNeighbors is called');
 					return getNeighbors($stateParams.country);
 				}]
 			}

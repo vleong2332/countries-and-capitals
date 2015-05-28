@@ -63,20 +63,36 @@ describe('cac_app_views', function() {
 
 	describe('Routing to "country" stage', function() {
 
-		var state = 'country',
-				getGeonameMock,
-				getCountryMock,
-				getCapitalMock,
-				getNeighborsMock;
+		var state = 'country';
 
 		beforeEach(function() {
 
 			module('cacRouteViewMod', function($provide, $urlRouterProvider) {
 				$urlRouterProvider.deferIntercept();
-				$provide.value('getGeoname', function() {return 'geoname';});
-				$provide.value('getCountry', function() {return 'country';});
-				$provide.value('getCapital', function() {return 'capital';});
-				$provide.value('getNeighbors', function() {return 'neighbors';});
+				$provide.value('getGeoname', function() {
+					console.log('mock getGeoName is called');
+					return {countryCode: 'fake'};
+				});
+				$provide.value('getCountry', function() {
+					console.log('mock getCountry is called');
+					return {geonames: [{
+						capital: 'fake',
+						countryCode: 'test'
+					}]};
+				});
+				$provide.value('getCapital', function(country) {
+					console.log('mock getCapital is called');
+					return 'capital';
+				});
+				$provide.value('getNeighbors', function() {
+					console.log('mock getNeighbors is called');
+					return 'neighbors';
+				});
+				$provide.value('geoname', {countryCode: 'fake'});
+				$provide.value('country', {geonames: [{
+						capital: 'fake',
+						countryCode: 'test'
+					}]});
 			});
 
 			inject(function(_$rootScope_, _$state_, _$injector_, $templateCache) {
@@ -103,8 +119,8 @@ describe('cac_app_views', function() {
 			$rootScope.$digest();
 			expect($state.current.name).toBe('country');
 
-			expect($injector.invoke($state.current.resolve.geoname)).toBe('geoname');
-			expect($injector.invoke($state.current.resolve.country)).toBe('country');
+			expect($injector.invoke($state.current.resolve.geoname)).toEqual({countryCode: 'fake'});
+			expect($injector.invoke($state.current.resolve.country)).toEqual({geonames: [{capital: 'fake', countryCode: 'test'}]});
 			expect($injector.invoke($state.current.resolve.capital)).toBe('capital');
 			expect($injector.invoke($state.current.resolve.neighbors)).toBe('neighbors');
 		});
