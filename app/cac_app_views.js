@@ -12,7 +12,8 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 
 		.state('countries', {
 			url: '/countries',
-			templateUrl: 'countries/countries.html',
+			//templateUrl: 'countries/countries.html',
+			template: 'test',
 			controller: 'countriesCtrl',
 			resolve : {
 			 	countries: ["getCountry", function(getCountry) {
