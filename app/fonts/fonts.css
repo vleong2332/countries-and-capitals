@@ -1,0 +1,36 @@
+@font-face {
+   font-family: 'Lato Bold';
+   src: url('Lato-Bold-webfont.eot');
+   src: url('Lato-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('Lato-Bold-webfont.woff2') format('woff2'),
+        url('Lato-Bold-webfont.woff') format('woff'),
+        url('Lato-Bold-webfont.ttf')  format('truetype'),
+        url('Lato-Bold-webfont.svg#Lato-Bold-webfont') format('svg');
+}
+@font-face {
+   font-family: 'Yantramanav Light';
+   src: url('yantramanav-light-webfont.eot');
+   src: url('yantramanav-light-webfont.eot?#iefix') format('embedded-opentype'),
+        url('yantramanav-light-webfont.woff2') format('woff2'),
+        url('yantramanav-light-webfont.woff') format('woff'),
+        url('yantramanav-light-webfont.ttf')  format('truetype'),
+        url('yantramanav-light-webfont.svg#yantramanav-light-webfont') format('svg');
+}
+@font-face {
+   font-family: 'Yantramanav Medium';
+   src: url('yantramanav-medium-webfont.eot');
+   src: url('yantramanav-medium-webfont.eot?#iefix') format('embedded-opentype'),
+        url('yantramanav-medium-webfont.woff2') format('woff2'),
+        url('yantramanav-medium-webfont.woff') format('woff'),
+        url('yantramanav-medium-webfont.ttf')  format('truetype'),
+        url('yantramanav-medium-webfont.svg#yantramanav-medium-webfont') format('svg');
+}
+@font-face {
+   font-family: 'Yantramanav Black';
+   src: url('yantramanav-black-webfont.eot');
+   src: url('yantramanav-black-webfont.eot?#iefix') format('embedded-opentype'),
+        url('yantramanav-black-webfont.woff2') format('woff2'),
+        url('yantramanav-black-webfont.woff') format('woff'),
+        url('yantramanav-black-webfont.ttf')  format('truetype'),
+        url('yantramanav-black-webfont.svg#yantramanav-black-webfont') format('svg');
+}

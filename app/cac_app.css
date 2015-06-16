@@ -9,20 +9,50 @@
 /*==================*/
 body, html {
   position: relative;
-  min-height: 100%; }
+  min-height: 100%;
+  font-family: "Yantramanav Light", Helvetica, sans-serif;
+  color: #333; }
 
 * {
   box-sizing: border-box; }
 
+.main-wrapper {
+  width: 1000px;
+  margin: 0 auto; }
+  .main-wrapper p {
+    line-height: 1.6; }
+  .main-wrapper p:first-child {
+    padding-top: 1em; }
+  .main-wrapper p:nth-child(2) {
+    padding-bottom: 1em; }
+
 header {
-  border-bottom: 1px solid black; }
+  background-color: #78CC5A;
+  padding: 1em 0; }
   header h1 {
-    text-align: center; }
+    font-family: "Lato Bold", "Helvetica Neue", Arial;
+    color: #FFF;
+    text-align: center;
+    margin: 0 auto; }
 
 #buttons {
   width: 100%;
   margin-top: 1em;
+  margin-bottom: 3em;
   text-align: center; }
+
+button {
+  box-sizing: inherit;
+  border: 1px solid #575E68;
+  background-color: #FFF;
+  color: #575E68;
+  padding: 0.5em 1.5em;
+  border-radius: 3px;
+  transition: all ease 0.2s; }
+
+button:hover {
+  color: #FFF;
+  background-color: #575E68; }
 
 .loading {
   position: relative;
@@ -71,11 +101,13 @@ table#countries {
   table#countries thead tr {
     position: absolute;
     top: 20px;
-    left: 0; }
+    left: 0;
+    border-radius: 5px 5px 0 0; }
   table#countries th.header {
     padding: 1em 0;
     text-align: center;
-    background-color: #ABABAB; }
+    background-color: #575E68;
+    color: #FFF; }
   table#countries .code {
     width: 50px;
     text-align: center; }
@@ -129,4 +161,5 @@ table#countries {
 
 #flag img {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  border-radius: 5px; }

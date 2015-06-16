@@ -46,6 +46,7 @@ function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
 			}
 		})
 			.success(function(data) {
+				console.log(data);
 				defer.resolve(data);
 			})
 			.error(function() {

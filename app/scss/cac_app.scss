@@ -7,20 +7,53 @@
 body, html {
 	position:relative;
 	min-height: 100%;
+	font-family: $generalFont;
+	color: $generalFontColor;
 }
 * {
 	box-sizing: border-box;
 }
+.main-wrapper {
+	width: $mainWidth;
+	margin: 0 auto;
+	p {
+		line-height: 1.6;
+	}
+	p:first-child {
+		padding-top: 1em;
+	}
+	p:nth-child(2) {
+		padding-bottom: 1em;
+	}
+}
 header {
-	border-bottom: 1px solid black;
+	background-color: $mainTheme;
+	padding: 1em 0;
 	h1 {
+		font-family: $headerFont;
+		color: $fontTheme;
 		text-align: center;
+		margin: 0 auto;
 	}
 }
 #buttons {
 	width: 100%;
 	margin-top: 1em;
+	margin-bottom: 3em;
 	text-align: center;
+}
+button {
+	box-sizing: inherit;
+	border: 1px solid $secondTheme;
+	background-color: $fontTheme;
+	color: $secondTheme;
+	padding: 0.5em 1.5em;
+	border-radius: 3px;
+	transition: all ease 0.2s;
+}
+button:hover {
+	color: $fontTheme;
+	background-color: $secondTheme;
 }
 .loading {
 	position: relative;
@@ -82,12 +115,14 @@ table#countries {
 		position: absolute;
 		top: 20px;
 		left: 0;
+		border-radius: 5px 5px 0 0;
 	}
 
 	th.header {
 		padding: 1em 0;
 		text-align: center;
-		background-color: $tableHeaderBG;
+		background-color: $secondTheme;
+		color: $fontTheme;
 	}
 
 	.code {width: 50px; text-align: center;}
@@ -146,4 +181,5 @@ table#countries {
 #flag img {
 	width: 100%;
 	height: 100%;
+	border-radius: 5px;
 }

@@ -8,7 +8,7 @@ cacLib.constant('GEONAME_PATH', 'getJSON');
 cacLib.constant('CAC_API_USERNAME', 'vleong2332');
 
 cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', 'CAC_API_USERNAME',
-	function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
+function($http, $q, CAC_API_PREFIX, COUNTRY_PATH, CAC_API_USERNAME) {
 		return function(countryCode) {
 			var country = countryCode || null;
 			var defer = $q.defer();
@@ -32,7 +32,8 @@ cacLib.factory('getCountry', ['$http', '$q', 'CAC_API_PREFIX', 'COUNTRY_PATH', '
 	}
 ]);
 
-cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
+cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, GEONAME_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -45,6 +46,7 @@ cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "
 			}
 		})
 			.success(function(data) {
+				console.log(data);
 				defer.resolve(data);
 			})
 			.error(function() {
@@ -54,7 +56,8 @@ cacLib.factory('getGeoname', ["$http", "$q", "CAC_API_PREFIX", "GEONAME_PATH", "
 	}
 }]);
 
-cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
+cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, NEIGHBORS_PATH, CAC_API_USERNAME) {
 	return function(geonameId) {
 		var defer = $q.defer();
 		$http({
@@ -76,7 +79,8 @@ cacLib.factory('getNeighbors', ["$http", "$q", "CAC_API_PREFIX", "NEIGHBORS_PATH
 	}
 }]);
 
-cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "CAC_API_USERNAME", function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
+cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "CAC_API_USERNAME",
+function($http, $q, CAC_API_PREFIX, SEARCH_PATH, CAC_API_USERNAME) {
 	return function(capitalName, countryCode) {
 		var defer = $q.defer();
 		$http({
@@ -84,12 +88,12 @@ cacLib.factory('getCapital', ["$http", "$q", "CAC_API_PREFIX", "SEARCH_PATH", "C
 			method: 'GET',
 			cache: true,
 			params: {
-				username: CAC_API_USERNAME,
 				q: capitalName,
 				name_equals: capitalName,
 				country: countryCode,
 				isNameRequired: true,
-				featureCode: 'PPLC'
+				featureCode: 'PPLC',
+				username: CAC_API_USERNAME
 			}
 		})
 			.success(function(data) {
@@ -130,15 +134,19 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 			controller: 'countryDetailCtrl',
 			resolve: {
 				geoname: ['$stateParams', 'getGeoname', function($stateParams, getGeoname) {
+					console.log('real getGeoname is called');
 					return getGeoname($stateParams.country);
 				}],
 				country: ['getCountry', 'geoname', function(getCountry, geoname) {
+					console.log('real getCountry is called');
 					return getCountry(geoname.countryCode);
 				}],
 				capital: ['getCapital', 'country', function(getCapital, country) {
+					console.log('real getCapital is called');
 					return getCapital(country.geonames[0].capital, country.geonames[0].countryCode);
 				}],
 				neighbors: ['$stateParams', 'getNeighbors', function($stateParams, getNeighbors) {
+					console.log('real getNeighbors is called');
 					return getNeighbors($stateParams.country);
 				}]
 			}

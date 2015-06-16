@@ -1,7 +1,7 @@
 var cacRouteViewMod = angular.module('cacRouteViewMod', ['ui.router', 'cacLib']);
 
 cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-	//$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 		.state('home', {
@@ -12,8 +12,7 @@ cacRouteViewMod.config(['$stateProvider', '$urlRouterProvider', function($stateP
 
 		.state('countries', {
 			url: '/countries',
-			//templateUrl: 'countries/countries.html',
-			template: 'test',
+			templateUrl: 'countries/countries.html',
 			controller: 'countriesCtrl',
 			resolve : {
 			 	countries: ["getCountry", function(getCountry) {
