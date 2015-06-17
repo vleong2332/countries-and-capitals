@@ -6,4 +6,4 @@ This exercise involved routing using ui.router, resolves and promises, angular a
 
 #### Notes
 
-Use Issues to propose changes or improvements.
+Use "Issues" to propose changes or improvements.
